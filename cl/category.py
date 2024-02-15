@@ -1,4 +1,8 @@
 class Category:
+    name: str
+    description: str
+    products: list
+    
     total_categories = 0
     total_unique_products = 0
 
