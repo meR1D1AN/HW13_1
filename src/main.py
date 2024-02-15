@@ -16,7 +16,7 @@ def main():
     print_categories_and_products(categories)
 
     print(f"Всего категорий: {Category.total_categories}")
-    print(f"Всего уникальный продуктов: {Category.total_unique_products}")
+    print(f"Всего уникальных продуктов: {Category.total_unique_products}")
 
 
 def print_categories_and_products(categories):
