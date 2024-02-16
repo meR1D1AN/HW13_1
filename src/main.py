@@ -16,6 +16,8 @@ def main():
         category = Category(category_data['name'], category_data['description'], products)
         categories.append(category)
 
+        Category.total_unique_products += len(products)
+
     print_categories_and_products(categories)
 
     print(f"Всего категорий: {Category.total_categories}")

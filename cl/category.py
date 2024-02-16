@@ -25,3 +25,4 @@ class Category:
         if product not in self.products:
             self.products.append(product)
             Category.total_unique_products += 1
+
