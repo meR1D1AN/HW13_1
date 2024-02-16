@@ -7,16 +7,19 @@ def main():
     data = load_data()
     categories = []
     for category_data in data:
-        category = Category(category_data['name'], category_data['description'])
-        categories.append(category)
+        products = []
         for product_data in category_data['products']:
             product = Product(product_data['name'], product_data['description'], product_data['price'],
                               product_data['quantity'])
-            category.add_product(product)  # Добавляем продукт в соответствующую категорию
+            products.append(product)
+
+        category = Category(category_data['name'], category_data['description'], products)
+        categories.append(category)
+
     print_categories_and_products(categories)
 
     print(f"Всего категорий: {Category.total_categories}")
-    print(f"Всего уникальный продуктов: {Category.total_unique_products}")
+    print(f"Всего уникальных продуктов: {Category.total_unique_products}")
 
 
 def print_categories_and_products(categories):

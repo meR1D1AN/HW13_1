@@ -1,11 +1,15 @@
 class Category:
+    name: str
+    description: str
+    products: list
+
     total_categories = 0
     total_unique_products = 0
 
-    def __init__(self, name, description):
+    def __init__(self, name, description, products):
         self.name = name
         self.description = description
-        self.products = []  # Инициализируем список продуктов для каждой категории
+        self.products = products
         Category.total_categories += 1
 
     def get_name(self):
