@@ -1,33 +1,35 @@
 from cl.category import Category
 from cl.product import Product
+import pytest
+from utils.load_json import load_data
 
 
 #
 #
 def test_category_initialization():
     category = Category("Тест названия категории", "Тест описания категории", {
-                        "name": "Тест названия товара",
-                        "description": "Тест описания товара",
-                        "price": 180000.0,
-                        "quantity": 5
-                    })
+        "name": "Тест названия товара",
+        "description": "Тест описания товара",
+        "price": 180000.0,
+        "quantity": 5
+    })
     assert category.name == "Тест названия категории"
     assert category.description == "Тест описания категории"
     assert category.products == {
-                        "name": "Тест названия товара",
-                        "description": "Тест описания товара",
-                        "price": 180000.0,
-                        "quantity": 5
-                    }
+        "name": "Тест названия товара",
+        "description": "Тест описания товара",
+        "price": 180000.0,
+        "quantity": 5
+    }
 
     assert category.get_name() == "Тест названия категории"
     assert category.get_description() == "Тест описания категории"
     assert category.get_products() == {
-                        "name": "Тест названия товара",
-                        "description": "Тест описания товара",
-                        "price": 180000.0,
-                        "quantity": 5
-                    }
+        "name": "Тест названия товара",
+        "description": "Тест описания товара",
+        "price": 180000.0,
+        "quantity": 5
+    }
 
     assert category.total_categories == 1
     assert category.total_unique_products == 0
@@ -44,3 +46,8 @@ def test_product_initialization():
     assert product.get_description() == "Тест описания товара"
     assert product.get_price() == 500.0
     assert product.get_quantity() == 10
+
+
+def test_load_data():
+    data = load_data()
+    assert isinstance(data, list)
