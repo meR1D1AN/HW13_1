@@ -1,6 +1,7 @@
 from cl.category import Category
 from cl.product import Product
 import pytest
+import os
 from utils.load_json import load_data
 
 
@@ -48,6 +49,16 @@ def test_product_initialization():
     assert product.get_quantity() == 10
 
 
+def test_load_data_list():
+    data = load_data()
+    assert isinstance(data, list)
+
+
 def test_load_data():
+    current_dir = os.path.dirname(os.path.dirname(__file__))
+    file_abs_path = os.path.join(current_dir, "utils", "products.json")
+
+    assert os.path.isfile(file_abs_path)
+
     data = load_data()
     assert isinstance(data, list)
