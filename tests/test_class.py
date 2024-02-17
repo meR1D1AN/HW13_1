@@ -39,12 +39,12 @@ def test_product_initialization():
     product = Product("Тест названия товара", "Тест описания товара", 500.0, 10)
     assert product.name == "Тест названия товара"
     assert product.description == "Тест описания товара"
-    assert product.price == 500.0
+    assert product._price == 500.0
     assert product.quantity == 10
 
     assert product.get_product_name() == "Тест названия товара"
     assert product.get_description() == "Тест описания товара"
-    assert product.get_price() == 500.0
+    assert product.price == 500.0
     assert product.get_quantity() == 10
 
 
