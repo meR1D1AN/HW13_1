@@ -32,7 +32,7 @@ def print_categories_and_products(categories):
         for product in category.products:
             print(f"\tИмя товара: {product.name}")
             print(f"\tОписание товара: {product.description}")
-            print(f"\tЦена: {product.price}")
+            print(f"\tЦена: {product._price}")
             print(f"\tКол-во: {product.quantity}")
             print()
 
