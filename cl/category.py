@@ -12,17 +12,23 @@ class Category:
         self.__products = products
         Category.total_categories += 1
 
-    @property
-    def products(self):
-        return self.__products
+    def __str__(self):
+        total_quantity = len(self)
+        return f"{self.name}, количество продуктов, {total_quantity} шт."
 
-    def get_name(self):
+    def __len__(self):
+        return sum(product.quantity for product in self.__products)
+
+    @property
+    def name_(self):
         return self.name
 
-    def get_description(self):
+    @property
+    def description_(self):
         return self.description
 
-    def get_products(self):
+    @property
+    def products_(self):
         return self.__products
 
     def add_product(self, product):
@@ -30,6 +36,7 @@ class Category:
             self.__products.append(product)
             Category.total_unique_products += 1
 
-    def display_products(self):
-        for product in self.__products:
-            print(f'{product.name}, {product.price} руб. Остаток: {product.quantity} шт.')
+    def remove_product(self, product):
+        if product in self.__products:
+            self.__products.remove(product)
+            Category.total_unique_products -= 1

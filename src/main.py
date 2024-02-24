@@ -1,5 +1,6 @@
 from cl.category import Category
 from cl.product import Product
+from cl.CategoryIterator import CategoryIterator
 from utils.load_json import load_data
 
 
@@ -29,7 +30,7 @@ def print_categories_and_products(categories):
         print(f"Категория: {category.name}")
         print(f"Описание: {category.description}")
         print("Товары:")
-        for product in category.products:
+        for product in category.products_:
             print(f"\tИмя товара: {product.name}")
             print(f"\tОписание товара: {product.description}")
             print(f"\tЦена: {product._price}")

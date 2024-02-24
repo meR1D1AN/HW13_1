@@ -10,10 +10,19 @@ class Product:
         self._price = price
         self.quantity = quantity
 
-    def get_product_name(self):
+    def __str__(self):
+        return f'{self.name}, {self.price} руб. Остаток: {self.quantity} шт.'
+
+    def __add__(self, other):
+        total_quantity = (self.price * self.quantity) + (other.price * other.quantity)
+        return total_quantity
+
+    @property
+    def name_(self):
         return self.name
 
-    def get_description(self):
+    @property
+    def description_(self):
         return self.description
 
     @property
@@ -34,7 +43,8 @@ class Product:
         else:
             self._price = new_price
 
-    def get_quantity(self):
+    @property
+    def quantity_(self):
         return self.quantity
 
     @classmethod
