@@ -72,7 +72,7 @@ class Smartphone(Product):
         self.memory = memory
 
     def __str__(self):
-        return (f'{self.color} {self.name} {self.model}, {self.memory} ГБ, {float(self.perfomance)} Ггц.\n'
+        return (f'{self.color} {self.name} {self.model}, {self.memory} ГБ, {self.perfomance} Ггц.\n'
                 f'Цена: {self.price} руб. Остаток: {self.quantity} шт.\n'
                 f'Описание: {self.description}\n')
 

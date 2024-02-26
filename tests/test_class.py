@@ -1,57 +1,79 @@
 from cl.category import Category
-from cl.product import Product
+from cl.product import Product, Smartphone, LawnGrass
 from utils.load_json import load_data
 import os
+import pytest
 
 
 def test_product_str():
-    product = Product("Товар", "Описание", 100.0, 10)
+    product = Product("Товар", "Описание", 100.0, 10, "red")
     assert str(product) == 'Товар, 100.0 руб. Остаток: 10 шт.'
 
 
-def test_product_add():
-    product1 = Product("Товар", "Описание", 100.0, 10)
-    product2 = Product("Товар", "Описание", 200.0, 5)
-    total_quantity = product1 + product2
-    assert total_quantity == 2000
+def test_add_product_valid():
+    category = Category("test category", "test description", [])
+    product = Product("test product", "test description", 10.0, 5, "red")
+    category.add_product(product)
+    assert product in category.products_
+
+
+def test_add_product_invalid_type():
+    category = Category("test category", "test description", [])
+    invalid_product = "not a product"
+    with pytest.raises(TypeError):
+        category.add_product(invalid_product)
+
+
+def test_remove_product_valid():
+    product = Product("test product", "test description", 10.0, 5, "red")
+    category = Category("test category", "test description", [product])
+    category.remove_product(product)
+    assert product not in category.products_
+
+
+def test_remove_product_invalid_type():
+    category = Category("test category", "test description", [])
+    invalid_product = "not a product"
+    with pytest.raises(TypeError):
+        category.remove_product(invalid_product)
 
 
 def test_product_setter():
-    product = Product("Товар", "Описание", 100.0, 10)
+    product = Product("Товар", "Описание", 100.0, 10, "red")
     product.price = 200.0
     assert product.price == 200.0
 
 
 def test_product_create():
-    product_list = [Product("Товар", "Описание", 100.0, 10)]
+    product_list = [Product("Товар", "Описание", 100.0, 10, "red")]
     product = Product.create_product("Товар", "Описание", 200.0, 5, product_list)
     assert len(product_list) == 1
 
 
 def test_category_len():
-    products = [Product("Товар1", "Описание1", 100.0, 10),
-                Product("Товар2", "Описание2", 200.0, 5)]
+    products = [Product("Товар1", "Описание1", 100.0, 10, "red"),
+                Product("Товар2", "Описание2", 200.0, 5, "blue")]
     category = Category("Тест названия категории", "Тест описания категории", products)
     assert len(category) == 15
 
 
 def test_category_str():
-    products = [Product("Товар1", "Описание1", 100.0, 10),
-                Product("Товар2", "Описание2", 200.0, 5)]
+    products = [Product("Товар1", "Описание1", 100.0, 10, "red"),
+                Product("Товар2", "Описание2", 200.0, 5, "blue")]
     category = Category("Тест названия категории", "Тест описания категории", products)
     assert str(category) == "Тест названия категории, количество продуктов, 15 шт."
 
 
 def test_category_add_product():
     category = Category("Тест названия категории", "Тест описания категории", [])
-    product = Product("Товар", "Описание", 100.0, 10)
+    product = Product("Товар", "Описание", 100.0, 10, "red")
     category.add_product(product)
     assert len(category.products_) == 1
 
 
 def test_category_remove_product():
     category = Category("Тест названия категории", "Тест описания категории", [])
-    product = Product("Товар", "Описание", 100.0, 10)
+    product = Product("Товар", "Описание", 100.0, 10, "red")
     category.remove_product(product)
     assert len(category.products_) == 0
 
@@ -82,11 +104,13 @@ def test_category_initialization():
 
 
 def test_product_initialization():
-    product = Product("Тест названия товара", "Тест описания товара", 500.0, 10)
+    product = Product("Тест названия товара", "Тест описания товара", 500.0, 10,
+                      "red")
     assert product.name == "Тест названия товара"
     assert product.description == "Тест описания товара"
     assert product._price == 500.0
     assert product.quantity == 10
+    assert product.color == "red"
 
     assert product.name_ == "Тест названия товара"
     assert product.description_ == "Тест описания товара"
@@ -101,3 +125,45 @@ def test_load_data_list():
     assert os.path.isfile(file_abs_path)
     data = load_data()
     assert isinstance(data, list)
+
+
+def test_smartphone_str():
+    smartphone = Smartphone("iPhone", "Best smartphone", 1000, 10, "black",
+                            "high", "X", 256)
+    expected_output = "black iPhone X, 256 ГБ, high Ггц.\nЦена: 1000 руб. Остаток: 10 шт.\nОписание: Best smartphone\n"
+    assert str(smartphone) == expected_output
+
+
+# test_lawn_grass.py
+
+def test_lawn_grass_str():
+    lawn_grass = LawnGrass("Green grass", "Best grass", 5, 100, "green",
+                           "USA", "2 weeks")
+    expected_output = ("Green grass, Цвет: green.\nСтрана: USA.\nЦена: 5 руб. и Остаток: 100 шт.\n"
+                       "Описание: Best grass\nСрок прорастания: 2 weeks.\n")
+    assert str(lawn_grass) == expected_output
+
+
+def test_product_add_():
+    product1 = Product("Product1", "Description1", 10, 5, "red")
+    product2 = Product("Product2", "Description2", 20, 3, "blue")
+    expected_total_quantity = (10 * 5) + (20 * 3)
+    assert (product1 + product2) == expected_total_quantity
+
+
+def test_product_price_setter_lower():
+    product = Product("Product1", "Description1", 10, 5, "red")
+    product.price = 8
+    assert product.price == 8
+
+
+def test_product_price_setter_same():
+    product = Product("Товар1", "Описание1", 10, 5, "red")
+    product.price = 10
+    assert product.price == 10
+
+
+def test_product_price_setter_invalid():
+    product = Product("Товар1", "Описание1", 10, 5, "red")
+    product.price = -5
+    assert product.price == 10
