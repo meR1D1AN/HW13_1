@@ -4,14 +4,15 @@ class Product:
     _price: float
     quantity: int
 
-    def __init__(self, name, description, price, quantity):
+    def __init__(self, name, description, price, quantity, color):
         self.name = name
         self.description = description
         self._price = price
         self.quantity = quantity
+        self.color = color
 
     def __str__(self):
-        return f'{self.name}, {self.price} руб. Остаток: {self.quantity} шт.'
+        return f'{self.name}, {self._price} руб. Остаток: {self.quantity} шт.'
 
     def __add__(self, other):
         total_quantity = (self.price * self.quantity) + (other.price * other.quantity)
@@ -58,3 +59,30 @@ class Product:
                     product.quantity = quantity
                 return
         return cls(name, description, price, quantity)
+
+
+class Smartphone(Product):
+    def __init__(self, name, description, price, quantity, color, perfomance, model, memory):
+        super().__init__(name, description, price, quantity, color)
+        self.perfomance = perfomance
+        self.model = model
+        self.memory = memory
+
+    def __str__(self):
+        return (f'{self.color} {self.name} {self.model}, {self.memory} ГБ, {float(self.perfomance)} Ггц.\n'
+                f'Цена: {self.price} руб. Остаток: {self.quantity} шт.\n'
+                f'Описание: {self.description}\n')
+
+
+class LawnGrass(Product):
+    def __init__(self, name, description, price, quantity, color, manufacturing_country, germination_period):
+        super().__init__(name, description, price, quantity, color)
+        self.manufacturing_country = manufacturing_country
+        self.germination_period = germination_period
+
+    def __str__(self):
+        return (f'{self.name}, Цвет: {self.color}.\n'
+                f'Страна: {self.manufacturing_country}.\n'
+                f'Цена: {self.price} руб. и Остаток: {self.quantity} шт.\n'
+                f'Описание: {self.description}\n'
+                f'Срок прорастания: {self.germination_period}.\n')
