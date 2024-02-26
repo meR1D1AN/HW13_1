@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+src/less15.1.py
+
 # C extensions
 *.so
 
