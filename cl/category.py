@@ -1,3 +1,6 @@
+from cl.product import Product
+
+
 class Category:
     name: str
     description: str
@@ -32,11 +35,15 @@ class Category:
         return self.__products
 
     def add_product(self, product):
+        if not isinstance(product, Product):
+            raise TypeError("Можно добавлять только продукты и их наследников")
         if product not in self.__products:
             self.__products.append(product)
             Category.total_unique_products += 1
 
     def remove_product(self, product):
+        if not isinstance(product, Product):
+            raise TypeError("Можно удалять только продукты и их наследников")
         if product in self.__products:
             self.__products.remove(product)
             Category.total_unique_products -= 1
