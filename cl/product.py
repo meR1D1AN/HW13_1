@@ -3,6 +3,7 @@ class Product:
     description: str
     _price: float
     quantity: int
+    color: str
 
     def __init__(self, name, description, price, quantity, color):
         self.name = name
@@ -15,6 +16,8 @@ class Product:
         return f'{self.name}, {self._price} руб. Остаток: {self.quantity} шт.'
 
     def __add__(self, other):
+        if type(self) != type(other):
+            raise TypeError("Нельзя складывать товары разных классов")
         total_quantity = (self.price * self.quantity) + (other.price * other.quantity)
         return total_quantity
 
