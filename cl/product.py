@@ -49,6 +49,7 @@ class Product:
 
     @property
     def quantity_(self):
+        if issubclass()
         return self.quantity
 
     @classmethod
