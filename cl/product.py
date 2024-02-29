@@ -41,7 +41,15 @@ class AbstractProduct(ABC):
         pass
 
 
-class Product(AbstractProduct):
+class Mixin:
+
+    def __repr__(self):
+        class_name = self.__class__.__name__
+        attrs = ", ".join([f"{repr(getattr(self, attr))}" for attr in self.__dict__])
+        return f"{class_name}({attrs})"
+
+
+class Product(AbstractProduct, Mixin):
     name: str
     description: str
     _price: float
@@ -107,7 +115,7 @@ class Product(AbstractProduct):
         return cls(name, description, price, quantity)
 
 
-class Smartphone(Product):
+class Smartphone(Product, Mixin):
     def __init__(self, name, description, price, quantity, color, perfomance, model, memory):
         super().__init__(name, description, price, quantity, color)
         self.perfomance = perfomance
@@ -120,7 +128,7 @@ class Smartphone(Product):
                 f'Описание: {self.description}\n')
 
 
-class LawnGrass(Product):
+class LawnGrass(Product, Mixin):
     def __init__(self, name, description, price, quantity, color, manufacturing_country, germination_period):
         super().__init__(name, description, price, quantity, color)
         self.manufacturing_country = manufacturing_country
@@ -131,4 +139,4 @@ class LawnGrass(Product):
                 f'Страна: {self.manufacturing_country}.\n'
                 f'Цена: {self.price} руб. и Остаток: {self.quantity} шт.\n'
                 f'Описание: {self.description}\n'
-                f'Срок прорастания: {self.germination_period}.\n')
+                f'Срок прорастания: {self.germination_period} дней.\n')
