@@ -42,6 +42,8 @@ class AbstractProduct(ABC):
 
 
 class Mixin:
+    def __init__(self, *args, **kwargs):
+        print(repr(self))
 
     def __repr__(self):
         class_name = self.__class__.__name__
