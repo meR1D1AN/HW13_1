@@ -1,7 +1,47 @@
 from abc import ABC, abstractmethod
 
 
-class Product(ABC):
+class AbstractProduct(ABC):
+    @abstractmethod
+    def __str__(self):
+        pass
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+    @property
+    @abstractmethod
+    def name_(self):
+        pass
+
+    @property
+    @abstractmethod
+    def description_(self):
+        pass
+
+    @property
+    @abstractmethod
+    def price(self):
+        pass
+
+    @price.setter
+    @abstractmethod
+    def price(self, new_price):
+        pass
+
+    @property
+    @abstractmethod
+    def quantity_(self):
+        pass
+
+    @classmethod
+    @abstractmethod
+    def create_product(cls, name, description, price, quantity, product_list):
+        pass
+
+
+class Product(AbstractProduct):
     name: str
     description: str
     _price: float
@@ -15,7 +55,6 @@ class Product(ABC):
         self.quantity = quantity
         self.color = color
 
-    @abstractmethod
     def __str__(self):
         return f'{self.name}, {self._price} руб. Остаток: {self.quantity} шт.'
 
