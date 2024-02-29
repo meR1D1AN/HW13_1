@@ -1,4 +1,7 @@
-class Product:
+from abc import ABC, abstractmethod
+
+
+class Product(ABC):
     name: str
     description: str
     _price: float
@@ -12,6 +15,7 @@ class Product:
         self.quantity = quantity
         self.color = color
 
+    @abstractmethod
     def __str__(self):
         return f'{self.name}, {self._price} руб. Остаток: {self.quantity} шт.'
 
@@ -49,7 +53,6 @@ class Product:
 
     @property
     def quantity_(self):
-        if issubclass()
         return self.quantity
 
     @classmethod
