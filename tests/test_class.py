@@ -44,10 +44,22 @@ def test_product_setter():
     assert product.price == 200.0
 
 
-def test_product_create():
-    product_list = [Product("Товар", "Описание", 100.0, 10, "red")]
-    product = Product.create_product("Описание", 200.0, 5, product_list,,
-    assert len(product_list) == 1
+def test_create_product():
+    product_list = []
+    # создаем первый продукт
+    product1 = Product.create_product("name1", "description1", 10, 20, "color1", product_list)
+    assert product1 in product_list
+
+    # обновляем существующий продукт
+    product2 = Product.create_product("name1", "description1", 15, 30, "color1", product_list)
+    assert product2 in product_list
+    assert product2.price == 15
+    assert product2.quantity == 30
+
+    # создаем новый продукт
+    product3 = Product.create_product("name2", "description2", 20, 40, "color2", product_list)
+    assert product3 in product_list
+    assert len(product_list) == 3
 
 
 def test_category_len():
@@ -140,7 +152,7 @@ def test_lawn_grass_str():
     lawn_grass = LawnGrass("Green grass", "Best grass", 5, 100, "green",
                            "USA", "2 weeks")
     expected_output = ("Green grass, Цвет: green.\nСтрана: USA.\nЦена: 5 руб. и Остаток: 100 шт.\n"
-                       "Описание: Best grass\nСрок прорастания: 2 weeks.\n")
+                       "Описание: Best grass\nСрок прорастания: 2 weeks дней.\n")
     assert str(lawn_grass) == expected_output
 
 

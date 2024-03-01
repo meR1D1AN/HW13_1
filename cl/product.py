@@ -117,13 +117,6 @@ class Product(AbstractProduct, Mixin):
         product_list.append(new_product)
         return new_product
 
-        #
-        #         else:
-        #             product.price = price
-        #             product.quantity = quantity
-        #         return
-        # return Product(name, description, price, quantity, color)
-
 
 class Smartphone(Product, Mixin):
     def __init__(self, name, description, price, quantity, color, perfomance, model, memory):
