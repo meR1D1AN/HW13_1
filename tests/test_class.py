@@ -56,10 +56,15 @@ def test_create_product():
     assert product2.price == 15
     assert product2.quantity == 30
 
+    product2 = Product.create_product("name1", "description1", 20, 32, "color1", product_list)
+    assert product2 in product_list
+    assert product2.price == 20
+    assert product2.quantity == 32
+
     # создаем новый продукт
     product3 = Product.create_product("name2", "description2", 20, 40, "color2", product_list)
     assert product3 in product_list
-    assert len(product_list) == 3
+    assert len(product_list) == 4
 
 
 def test_category_len():
