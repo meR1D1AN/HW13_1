@@ -46,7 +46,7 @@ def test_product_setter():
 
 def test_product_create():
     product_list = [Product("Товар", "Описание", 100.0, 10, "red")]
-    product = Product.create_product("Товар", "Описание", 200.0, 5, product_list)
+    product = Product.create_product("Описание", 200.0, 5, product_list,,
     assert len(product_list) == 1
 
 

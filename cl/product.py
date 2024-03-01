@@ -35,9 +35,8 @@ class AbstractProduct(ABC):
     def quantity_(self):
         pass
 
-    @classmethod
     @abstractmethod
-    def create_product(cls, name, description, price, quantity, product_list):
+    def create_product(self, name, description, price, quantity, color, product_list):
         pass
 
 
@@ -46,9 +45,7 @@ class Mixin:
         print(repr(self))
 
     def __repr__(self):
-        class_name = self.__class__.__name__
-        attrs = ", ".join([f"{repr(getattr(self, attr))}" for attr in self.__dict__])
-        return f"{class_name}({attrs})"
+        return f"Создан объект: {self.__class__.__name__}\n\t{self.__dict__.items()}"
 
 
 class Product(AbstractProduct, Mixin):
@@ -104,17 +101,28 @@ class Product(AbstractProduct, Mixin):
     def quantity_(self):
         return self.quantity
 
-    @classmethod
-    def create_product(cls, name, description, price, quantity, product_list):
+    @staticmethod
+    def create_product(name, description, price, quantity, color, product_list):
         for product in product_list:
-            if product.name == name:
-                if product.price > price:
-                    product.quantity += quantity
-                else:
+            if (product.name == name and
+                    product.description == description and
+                    product.price == price and
+                    product.quantity == quantity and
+                    product.color == color):
+                if product.price < price:
                     product.price = price
-                    product.quantity = quantity
-                return
-        return cls(name, description, price, quantity)
+                product.quantity += quantity
+                return product
+        new_product = Product(name, description, price, quantity, color)
+        product_list.append(new_product)
+        return new_product
+
+        #
+        #         else:
+        #             product.price = price
+        #             product.quantity = quantity
+        #         return
+        # return Product(name, description, price, quantity, color)
 
 
 class Smartphone(Product, Mixin):
