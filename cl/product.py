@@ -153,7 +153,7 @@ class Smartphone(Product):
         return new_product
 
 
-class LawnGrass(Product, Mixin):
+class LawnGrass(Product):
     def __init__(self, name, description, price, quantity, color, manufacturing_country, germination_period):
         self.manufacturing_country = manufacturing_country
         self.germination_period = germination_period
