@@ -157,7 +157,7 @@ def test_lawn_grass_str():
     lawn_grass = LawnGrass("Green grass", "Best grass", 5, 100, "green",
                            "USA", "2 weeks")
     expected_output = ("Green grass, Цвет: green.\nСтрана: USA.\nЦена: 5 руб. и Остаток: 100 шт.\n"
-                       "Описание: Best grass\nСрок прорастания: 2 weeks дней.\n")
+                       "Описание: Best grass\nСрок прорастания: 2 weeks.\n")
     assert str(lawn_grass) == expected_output
 
 

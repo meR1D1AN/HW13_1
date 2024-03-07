@@ -57,6 +57,8 @@ class Product(AbstractProduct, Mixin):
     color: str
 
     def __init__(self, name, description, price, quantity, color):
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         self.name = name
         self.description = description
         self._price = price
@@ -190,11 +192,4 @@ class LawnGrass(Product, Mixin):
 pr = Product("iPhone", "Best smartphone", 1000, 10, None)
 emp1 = Smartphone("iPhone", "Best smartphone", 1000, 10, "black", "high", "X", 256)
 lw = LawnGrass("Green grass", "Best grass", 5, 100, "green", "USA", "2 weeks")
-
-product_list = []
-
-emp1.create_product("iPhone", "Best smartphone", 1000, 10, "black", "high", "X", 256, product_list)
-lw.create_product("Green grass", "Best grass", 5, 100, "green", "USA", "2 weeks", product_list)
-
-print()
-print(product_list)
+nullproduct = Product('LG', 'TV 4k OLED', 1000000, 0, 'black')

@@ -11,7 +11,7 @@ def main():
         products = []
         for product_data in category_data['products']:
             product = Product(product_data['name'], product_data['description'], product_data['price'],
-                              product_data['quantity'])
+                              product_data['quantity'], product_data['color'])
             products.append(product)
 
         category = Category(category_data['name'], category_data['description'], products)
