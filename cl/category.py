@@ -47,3 +47,14 @@ class Category:
         if product in self.__products:
             self.__products.remove(product)
             Category.total_unique_products -= 1
+
+    def calculate_avg_price(self):
+        total_price = sum(product.price * product.quantity for product in self.__products)
+        total_quantity = sum(product.quantity for product in self.__products)
+
+        try:
+            avg_price = total_price / total_quantity
+        except ZeroDivisionError:
+            return 0
+
+        return avg_price

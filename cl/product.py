@@ -192,4 +192,4 @@ class LawnGrass(Product, Mixin):
 pr = Product("iPhone", "Best smartphone", 1000, 10, None)
 emp1 = Smartphone("iPhone", "Best smartphone", 1000, 10, "black", "high", "X", 256)
 lw = LawnGrass("Green grass", "Best grass", 5, 100, "green", "USA", "2 weeks")
-nullproduct = Product('LG', 'TV 4k OLED', 1000000, 0, 'black')
+# nullproduct = Product('LG', 'TV 4k OLED', 1000000, 0, 'black')
